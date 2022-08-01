@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title> Sound Wave </title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://unpkg.com/wavesurfer.js"></script>
+    </head>
+    <body>
+        <div class="hero">
+            <div class="music">
+                <div class="Book">
+                    <img src="Images/P1.jpg" alt="">
+                </div>
+                
+                <div class="info">
+                    <h1>The legend of the man-eating </h1>
+                    <p>Writer : Ahmed Khaled Thawfik</p>
+                    
+                    <!-- audio basic view  -->
+                    <!-- <audio controls>
+                        <source src="Images/mercy-badshah.mp3" type="audio/mp3">
+                    </audio> -->
+
+                    <div id="waveform"></div>
+
+                    <div class="controls">
+                        <img src="Images/play.png" id="playBtn" alt="">
+                        <img src="Images/stop.png" id="stopBtn" alt="">
+                        <img src="Images/volume.png" id="volumeBtn" alt="">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            var playBtn = document.getElementById("playBtn");
+            var stopBtn = document.getElementById("stopBtn");
+            var volumeBtn = document.getElementById("volumeBtn");
+
+
+            var wavesurfer = WaveSurfer.create({
+                container: '#waveform',
+                waveColor: '#dde5ec',
+                progressColor: '#03cebf',
+                barWidth: 3,
+                height: 100,
+                responsive: true,
+                hideScrollbar: true,
+                barRadius: 4
+
+            });
+
+            wavesurfer.load('Images/The legend of the man-eating.mp3');
+
+            playBtn.onclick = function(){
+                wavesurfer.playPause();
+                if(playBtn.src.includes("play.png")){
+                    playBtn.src = "Images/pause.png";
+                }else{
+                    playBtn.src = "Images/play.png";
+                }
+            }
+            stopBtn.onclick = function(){
+                wavesurfer.stop();
+                playBtn.src = "Images/play.png";
+            }
+            volumeBtn.onclick = function(){
+                wavesurfer.toggleMute();
+                if(volumeBtn.src.includes("volume.png")){
+                    volumeBtn.src = "Images/mute.png";
+                }else{
+                    volumeBtn.src = "Images/volume.png";
+                }
+
+            }
+
+            wavesurfer.on('finish', function () {
+                playBtn.src = "Images/play.png";
+                wavesurfer.stop();
+            });
+
+        </script>
+
+        
+
+    </body>
+</html>
